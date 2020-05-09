@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Set;
 
-@RequestMapping("/owners")
+@RequestMapping({"/owners", "/owners.html"})
 @Controller
 public class OwnerController {
 

@@ -1,6 +1,7 @@
 package com.hassanmahmud.hmpetclinic.services.map;
 
 import com.hassanmahmud.hmpetclinic.model.Vet;
+import com.hassanmahmud.hmpetclinic.services.SpecialityService;
 import com.hassanmahmud.hmpetclinic.services.VetService;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,13 @@ import java.util.Set;
 
 @Service
 public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
+
+    private final SpecialityService specialityService;
+
+    public VetMapService(SpecialityService specialityService) {
+        this.specialityService = specialityService;
+    }
+
     @Override
     public Set<Vet> findAll() {
         return super.findAll();
@@ -25,6 +33,19 @@ public class VetMapService extends AbstractMapService<Vet, Long> implements VetS
 
     @Override
     public Vet save(Vet object) {
+        if (object == null)
+            return null;
+
+        if (object.getSpecialities() == null)
+            return super.save(object);
+
+        object.getSpecialities().forEach(speciality -> {
+            if (speciality.getId() == null) {
+                var savedSpeciality = specialityService.save(speciality);
+                speciality.setId(savedSpeciality.getId());
+            }
+        });
+
         return super.save(object);
     }
 

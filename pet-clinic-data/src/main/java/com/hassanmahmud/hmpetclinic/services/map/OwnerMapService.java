@@ -2,9 +2,11 @@ package com.hassanmahmud.hmpetclinic.services.map;
 
 import com.hassanmahmud.hmpetclinic.model.Owner;
 import com.hassanmahmud.hmpetclinic.services.OwnerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
     @Override
     public Set<Owner> findAll() {

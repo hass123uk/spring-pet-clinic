@@ -2,9 +2,11 @@ package com.hassanmahmud.hmpetclinic.services.map;
 
 import com.hassanmahmud.hmpetclinic.model.Vet;
 import com.hassanmahmud.hmpetclinic.services.VetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
     @Override
     public Set<Vet> findAll() {

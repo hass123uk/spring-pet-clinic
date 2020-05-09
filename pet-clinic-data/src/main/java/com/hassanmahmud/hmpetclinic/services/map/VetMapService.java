@@ -1,11 +1,11 @@
 package com.hassanmahmud.hmpetclinic.services.map;
 
 import com.hassanmahmud.hmpetclinic.model.Vet;
-import com.hassanmahmud.hmpetclinic.services.CrudService;
+import com.hassanmahmud.hmpetclinic.services.VetService;
 
 import java.util.Set;
 
-public class VetMapService<T, ID> extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
     @Override
     public Set<Vet> findAll() {
         return super.findAll();
@@ -29,5 +29,10 @@ public class VetMapService<T, ID> extends AbstractMapService<Vet, Long> implemen
     @Override
     public Vet findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public Vet findByLastName(String lastName) {
+        return null;
     }
 }

@@ -1,11 +1,11 @@
 package com.hassanmahmud.hmpetclinic.services.map;
 
 import com.hassanmahmud.hmpetclinic.model.Owner;
-import com.hassanmahmud.hmpetclinic.services.CrudService;
+import com.hassanmahmud.hmpetclinic.services.OwnerService;
 
 import java.util.Set;
 
-public class OwnerMapService<T, ID> extends AbstractMapService<Owner, Long> implements CrudService<Owner, Long> {
+public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -29,5 +29,10 @@ public class OwnerMapService<T, ID> extends AbstractMapService<Owner, Long> impl
     @Override
     public Owner findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 }

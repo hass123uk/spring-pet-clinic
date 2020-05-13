@@ -1,7 +1,7 @@
 package com.hassanmahmud.hmpetclinic.repositories;
 
-import com.hassanmahmud.hmpetclinic.model.Vet;
+import com.hassanmahmud.hmpetclinic.model.Speciality;
 import org.springframework.data.repository.CrudRepository;
 
-public interface SpecialityRepository extends CrudRepository<Vet, Long> {
+public interface SpecialityRepository extends CrudRepository<Speciality, Long> {
 }

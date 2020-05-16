@@ -36,27 +36,27 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadData() {
-        PetType dog = new PetType();
-        dog.setName("Dog");
+        var dog = PetType.builder().name("Dog").build();
         PetType savedDogType = petTypeService.save(dog);
 
-        PetType cat = new PetType();
-        dog.setName("Cat");
+        var cat = PetType.builder().name("Cat").build();
         PetType savedCatType = petTypeService.save(cat);
 
-        Owner owner1 = new Owner();
-        owner1.setFirstName("Michael");
-        owner1.setLastName("Weston");
-        owner1.setAddress("123 Washington");
-        owner1.setCity("Miami");
-        owner1.setTelephone("12351351");
+        var owner1 = Owner.builder()
+                .firstName("Michael")
+                .lastName("Weston")
+                .address("123 Washington")
+                .city("Miami")
+                .telephone("124125124")
+                .build();
 
-        Pet mikesPet = new Pet();
+        var mikesPet = Pet.builder()
+                .owner(owner1)
+                .name("Rosco")
+                .petType(savedDogType)
+                .birthDate(LocalDate.now())
+                .build();
 
-        mikesPet.setOwner(owner1);
-        mikesPet.setName("Rosco");
-        mikesPet.setPetType(savedDogType);
-        mikesPet.setBirthDate(LocalDate.now());
         owner1.getPets().add(mikesPet);
 
         ownerService.save(owner1);

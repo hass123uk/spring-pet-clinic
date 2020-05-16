@@ -1,10 +1,7 @@
 package com.hassanmahmud.hmpetclinic.bootstrap;
 
 import com.hassanmahmud.hmpetclinic.model.*;
-import com.hassanmahmud.hmpetclinic.services.OwnerService;
-import com.hassanmahmud.hmpetclinic.services.PetTypeService;
-import com.hassanmahmud.hmpetclinic.services.SpecialityService;
-import com.hassanmahmud.hmpetclinic.services.VetService;
+import com.hassanmahmud.hmpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,15 +12,18 @@ public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
-    private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
+    private final PetTypeService petTypeService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-                      SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService,
+                      SpecialityService specialityService, VisitService visitService,
+                      PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
-        this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
@@ -76,6 +76,11 @@ public class DataLoader implements CommandLineRunner {
         owner1.getPets().add(fionaCat);
 
         ownerService.save(owner2);
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionaCat);
+        catVisit.setLocalDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
 
         System.out.println("Loaded Owners....");
 

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Getter
@@ -19,10 +20,8 @@ public class Vet extends Person {
     @Builder
     public Vet(Long id, String firstName, String lastName, Set<Speciality> specialities) {
         super(id, firstName, lastName);
-        this.specialities = specialities;
+        this.specialities = Optional.ofNullable(specialities).orElse(new HashSet<>());
     }
-
-    ;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "vet_specialties",

@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Getter
@@ -17,15 +18,8 @@ import java.util.Set;
 @Table(name = "pets")
 public class Pet extends BaseEntity {
 
-    @Builder
-    public Pet(Long id, String name, PetType petType, Owner owner, Set<Visit> vists, LocalDate birthDate) {
-        super(id);
-        this.name = name;
-        this.petType = petType;
-        this.owner = owner;
-        this.vists = vists;
-        this.birthDate = birthDate;
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    private Set<Visit> visits = new HashSet<>();
 
     private String name;
 
@@ -37,8 +31,16 @@ public class Pet extends BaseEntity {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
-    private Set<Visit> vists = new HashSet<>();
+    @Builder
+    public Pet(Long id, String name, PetType petType, Owner owner,
+               Set<Visit> visits, LocalDate birthDate) {
+        super(id);
+        this.name = name;
+        this.petType = petType;
+        this.owner = owner;
+        this.visits = Optional.ofNullable(visits).orElse(new HashSet<>());
+        this.birthDate = birthDate;
+    }
 
     private LocalDate birthDate;
 }

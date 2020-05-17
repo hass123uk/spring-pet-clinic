@@ -5,6 +5,7 @@ import com.hassanmahmud.hmpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 
 @Component
@@ -27,6 +28,7 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
 
         int count = petTypeService.findAll().size();
